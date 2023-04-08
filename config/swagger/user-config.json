@@ -1,0 +1,6 @@
+{
+  "library": "okhttp-gson",
+  "modelPackage": "com.github.jvalentino.juliet.user.model",
+  "apiPackage": "com.github.jvalentino.juliet.user.api",
+  "invokerPackage": "com.github.jvalentino.juliet.user"
+}

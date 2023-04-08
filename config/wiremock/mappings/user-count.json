@@ -1,0 +1,13 @@
+{
+  "request": {
+    "url": "/user/count",
+    "method": "GET"
+  },
+  "response": {
+    "status": 200,
+    "body": "{ \"value\": \"1\" }",
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}

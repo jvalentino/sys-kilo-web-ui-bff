@@ -1,0 +1,19 @@
+
+version: '3.8'
+services:
+  redis:
+    container_name: kilo-redis
+    image: redis:6.2-alpine
+    restart: always
+    ports:
+      - '6379:6379'
+    command: redis-server --save 20 1 --loglevel warning --requirepass redis
+    volumes:
+      - ./dev-redis:/data
+  wiremock:
+    container_name: kilo-wiremock-bff
+    image: wiremock/wiremock:2.35.0
+    volumes:
+      - ./config/wiremock:/home/wiremock
+    ports:
+      - 8888:8080

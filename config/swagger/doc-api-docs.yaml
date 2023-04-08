@@ -1,0 +1,256 @@
+openapi: 3.0.1
+info:
+  title: sys-juliet-rest-doc
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+    description: Generated server url
+security:
+  - X-Auth-Token: []
+paths:
+  /doc/version/new/{docId}/user/{userId}:
+    post:
+      tags:
+        - doc-rest
+      operationId: upload
+      parameters:
+        - name: docId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DocDto'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResultDto'
+  /doc/upload/user/{userId}:
+    post:
+      tags:
+        - doc-rest
+      operationId: upload_1
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DocDto'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ResultDto'
+  /doc/versions/{docId}:
+    get:
+      tags:
+        - doc-rest
+      operationId: versions
+      parameters:
+        - name: docId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ViewVersionDto'
+  /doc/version/download/{docVersionId}:
+    get:
+      tags:
+        - doc-rest
+      operationId: downloadVersion
+      parameters:
+        - name: docVersionId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DocDto'
+  /doc/count:
+    get:
+      tags:
+        - doc-rest
+      operationId: countDocs
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CountDto'
+  /doc/all:
+    get:
+      tags:
+        - doc-rest
+      operationId: dashboard
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DocListDto'
+components:
+  schemas:
+    DocDto:
+      type: object
+      properties:
+        fileName:
+          type: string
+        base64:
+          type: string
+        mimeType:
+          type: string
+    ResultDto:
+      type: object
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string
+    AuthUser:
+      type: object
+      properties:
+        authUserId:
+          type: integer
+          format: int64
+        email:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+    Doc:
+      type: object
+      properties:
+        docId:
+          type: integer
+          format: int64
+        name:
+          type: string
+        mimeType:
+          type: string
+        createdByUser:
+          $ref: '#/components/schemas/AuthUser'
+        updatedByUser:
+          $ref: '#/components/schemas/AuthUser'
+        createdDateTime:
+          type: string
+          format: date-time
+        updatedDateTime:
+          type: string
+          format: date-time
+        versions:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/DocVersion'
+        tasks:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/DocTask'
+    DocTask:
+      type: object
+      properties:
+        docTaskId:
+          type: integer
+          format: int64
+        doc:
+          $ref: '#/components/schemas/Doc'
+        name:
+          type: string
+        status:
+          type: string
+        content:
+          type: string
+        createdByUser:
+          $ref: '#/components/schemas/AuthUser'
+        updatedByUser:
+          $ref: '#/components/schemas/AuthUser'
+        createdDateTime:
+          type: string
+          format: date-time
+        updatedDateTime:
+          type: string
+          format: date-time
+    DocVersion:
+      type: object
+      properties:
+        docVersionId:
+          type: integer
+          format: int64
+        versionNum:
+          type: integer
+          format: int64
+        doc:
+          $ref: '#/components/schemas/Doc'
+        data:
+          type: array
+          items:
+            type: string
+            format: byte
+        createdDateTime:
+          type: string
+          format: date-time
+        createdByUser:
+          $ref: '#/components/schemas/AuthUser'
+    ViewVersionDto:
+      type: object
+      properties:
+        doc:
+          $ref: '#/components/schemas/Doc'
+    CountDto:
+      type: object
+      properties:
+        value:
+          type: integer
+          format: int64
+    DocListDto:
+      type: object
+      properties:
+        documents:
+          type: array
+          items:
+            $ref: '#/components/schemas/Doc'
+  securitySchemes:
+    X-Auth-Token:
+      type: apiKey
+      name: X-Auth-Token
+      in: header

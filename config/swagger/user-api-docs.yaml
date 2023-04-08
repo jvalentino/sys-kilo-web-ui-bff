@@ -1,0 +1,100 @@
+openapi: 3.0.1
+info:
+  title: sys-juliet-rest-user
+  version: 1.0.0
+servers:
+  - url: http://localhost:8081
+    description: Generated server url
+security:
+  - X-Auth-Token: []
+paths:
+  /user/login:
+    post:
+      tags:
+        - user-rest
+      operationId: login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserDto'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AuthUser'
+  /user/list:
+    post:
+      tags:
+        - user-rest
+      operationId: listUsers
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListDto'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AuthUser'
+  /user/count:
+    get:
+      tags:
+        - user-rest
+      operationId: performCount
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CountDto'
+components:
+  schemas:
+    UserDto:
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+    AuthUser:
+      type: object
+      properties:
+        authUserId:
+          type: integer
+          format: int64
+        email:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+    ListDto:
+      type: object
+      properties:
+        values:
+          type: array
+          items:
+            type: integer
+            format: int64
+    CountDto:
+      type: object
+      properties:
+        value:
+          type: integer
+          format: int64
+  securitySchemes:
+    X-Auth-Token:
+      type: apiKey
+      name: X-Auth-Token
+      in: header

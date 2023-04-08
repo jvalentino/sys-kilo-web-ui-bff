@@ -1,0 +1,13 @@
+{
+  "request": {
+    "urlPathPattern": "/doc/versions/([a-z1-9]*)",
+    "method": "GET"
+  },
+  "response": {
+    "status": 200,
+    "body": "{\"doc\":{\"docId\":\"7a8c4191-1910-4d88-b191-910bc27970a4\",\"name\":\"sample.pdf\",\"mimeType\":\"application/pdf\",\"createdByUser\":null,\"updatedByUser\":null,\"createdDateTime\":\"2023-03-15T17:53:49.104+0000\",\"updatedDateTime\":\"2023-03-15T18:07:44.408+0000\",\"versions\":[{\"docVersionId\":\"7319d57d-fac5-4c22-beda-d081c6a0efb9\",\"versionNum\":1,\"doc\":null,\"data\":null,\"createdDateTime\":\"2023-03-15T17:53:49.104+0000\",\"createdByUser\":null},{\"docVersionId\":\"7319d57d-fac5-4c22-beda-d081c6a0efb9\",\"versionNum\":2,\"doc\":null,\"data\":null,\"createdDateTime\":\"2023-03-15T18:05:12.140+0000\",\"createdByUser\":null},{\"docVersionId\":\"a8ca1eac-42f3-4d04-9807-fe939bc324c6\",\"versionNum\":3,\"doc\":null,\"data\":null,\"createdDateTime\":\"2023-03-15T18:07:44.408+0000\",\"createdByUser\":null}],\"tasks\":null}}",
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}

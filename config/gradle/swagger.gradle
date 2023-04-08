@@ -1,0 +1,26 @@
+// Swagger!
+swaggerSources {
+    doc {
+        inputFile = file('config/swagger/doc-api-docs.yaml')
+        code {
+            language = 'java'
+            configFile = file('config/swagger/doc-config.json')
+        }
+    }
+    user {
+        inputFile = file('config/swagger/user-api-docs.yaml')
+        code {
+            language = 'java'
+            configFile = file('config/swagger/user-config.json')
+        }
+    }
+}
+
+// Configure compile task dependency and source
+compileJava.dependsOn swaggerSources.doc.code
+sourceSets.main.java.srcDir "${swaggerSources.doc.code.outputDir}/src/main/java"
+sourceSets.main.resources.srcDir "${swaggerSources.doc.code.outputDir}/src/main/resources"
+
+compileJava.dependsOn swaggerSources.user.code
+sourceSets.main.java.srcDir "${swaggerSources.user.code.outputDir}/src/main/java"
+sourceSets.main.resources.srcDir "${swaggerSources.user.code.outputDir}/src/main/resources"

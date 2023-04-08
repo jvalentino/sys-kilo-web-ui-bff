@@ -1,0 +1,13 @@
+{
+  "request": {
+    "urlPathPattern": "/doc/version/new/([a-z1-9]*)/user/([a-z1-9]*)",
+    "method": "POST"
+  },
+  "response": {
+    "status": 200,
+    "body": "{\"success\":true,\"message\":null}",
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}

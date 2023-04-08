@@ -1,0 +1,108 @@
+management:
+  apiKeyDoc: 123
+  apiDocUrl: http://localhost:8888
+  apiKeyUser: 123
+  apiUserUrl: http://localhost:8888
+  health:
+    circuitbreakers:
+      enabled: 'true'
+    ratelimiters:
+      enabled: 'true'
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
+spring:
+  application:
+    name: sys-kilo-web-ui-bff
+  redis:
+    host: localhost
+    port: 6379
+    password: redis
+  session:
+    store-type: redis
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+logging:
+  file:
+    path: .
+    name: spring-boot.log
+  level:
+    org:
+      springframework:
+        web: DEBUG
+      hibernate:
+        type:
+          descriptor:
+            sql:
+              BasicBinder: TRACE
+        SQL: DEBUG
+springdoc:
+  swagger-ui:
+    url: /v3/api-docs.yaml
+server:
+  port: ${PORT:8080}
+resilience4j:
+  circuitbreaker:
+    instances:
+      Dashboard:
+        registerHealthIndicator: true
+        ringBufferSizeInClosedState: 5
+        ringBufferSizeInHalfOpenState: 3
+        waitDurationInOpenState: 10s
+        failureRateThreshold: 50
+        maxRetryAttempts: 3
+        waitDuration: 5000
+      Index:
+        registerHealthIndicator: true
+        ringBufferSizeInClosedState: 5
+        ringBufferSizeInHalfOpenState: 3
+        waitDurationInOpenState: 10s
+        failureRateThreshold: 50
+        maxRetryAttempts: 3
+        waitDuration: 5000
+      CustomLogin:
+        registerHealthIndicator: true
+        ringBufferSizeInClosedState: 5
+        ringBufferSizeInHalfOpenState: 3
+        waitDurationInOpenState: 10s
+        failureRateThreshold: 50
+        maxRetryAttempts: 3
+        waitDuration: 5000
+      UploadFile:
+        registerHealthIndicator: true
+        ringBufferSizeInClosedState: 5
+        ringBufferSizeInHalfOpenState: 3
+        waitDurationInOpenState: 10s
+        failureRateThreshold: 50
+        maxRetryAttempts: 3
+        waitDuration: 5000
+      ViewVersions:
+        registerHealthIndicator: true
+        ringBufferSizeInClosedState: 5
+        ringBufferSizeInHalfOpenState: 3
+        waitDurationInOpenState: 10s
+        failureRateThreshold: 50
+        maxRetryAttempts: 3
+        waitDuration: 5000
+      DownloadVersion:
+        registerHealthIndicator: true
+        ringBufferSizeInClosedState: 5
+        ringBufferSizeInHalfOpenState: 3
+        waitDurationInOpenState: 10s
+        failureRateThreshold: 50
+        maxRetryAttempts: 3
+        waitDuration: 5000
+      UploadVersion:
+        registerHealthIndicator: true
+        ringBufferSizeInClosedState: 5
+        ringBufferSizeInHalfOpenState: 3
+        waitDurationInOpenState: 10s
+        failureRateThreshold: 50
+        maxRetryAttempts: 3
+        waitDuration: 5000
